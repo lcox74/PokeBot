@@ -1,0 +1,7 @@
+[Username]
+pos=0,0
+health=100
+maxHealth=100
+level=0
+experience=0
+pokemon=0
