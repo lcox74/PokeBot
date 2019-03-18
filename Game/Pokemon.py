@@ -118,5 +118,5 @@ class Pokemon:
         """ evolves the pokemon to its evolution state """
         pass
     
-pikachu = Pokemon('Pokemon.txt', 'Resistances.txt', 'Pikachu')
+pikachu = Pokemon('Pokemon', 'Resistances', 'Pikachu')
 print(pikachu.get_resistances(), pikachu.get_type())

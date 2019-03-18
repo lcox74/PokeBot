@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import urllib.request
 url = 'https://pokemondb.net/pokedex/all'
-txt = open('Pokemon.txt','w+')
+txt = open('Pokemon','w+')
 
 class AppURLopener(urllib.request.FancyURLopener):
     version = "Mozilla/5.0"
