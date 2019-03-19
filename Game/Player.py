@@ -1,21 +1,19 @@
 import os
+import Game.Pokemon as Pokemon
+from Pokemon import New_Pokemon
 
 class Player(object):
 	def __init__(self, ID, force=False):
+		self._Int_Pokemon = open('Pokemon_txt', 'r')
+		self._Player_Pokemon = open('Pokemon_txt', 'w+')
 		self._id = str(ID)
-
 		self._position = (0, 0)
-
 		self.maxHealth = 100
 		self.health = self.maxHealth
-
 		self.level = 0
 		self.experience = 0
-
 		self.pokemon = []
-
 		self.userfile = 'UserData/' + self._id + '.user'
-
 		if os.path.isfile(self.userfile) and force == False:
 			self.loadData (self.userfile)
 		else:
@@ -43,6 +41,12 @@ class Player(object):
 					self.experience = int(editLine[1]) 
 				elif editLine[0] == "pokemon":
 					self.pokemon = [] # Set this as a index
+	
+	def get_health(self):
+		return self.health
+	
+	def get_hurt(self):
+		self.health = self.health - 5
 
 	def MoveLeft (self):
 		self._position = (self._position[0] - 1, self._position[1])
@@ -58,3 +62,16 @@ class Player(object):
 
 	def GetPosition (self):
 		return self._position
+	
+	def Add_Pokemon(self, Pokemon_Name):
+		for line in self._Int_Pokemon:
+			print(line)
+			if(line == ''):
+				pass
+			else:
+				if(Pokemon_Name == line[0]):
+					Pokemon_Name = New_Pokemon(Pokemon_Name)
+					self.pokemon.append(Pokemon_Name)
+					return 'Pokemon Added'
+				else:
+					return 'Thats Not A Pokemon'

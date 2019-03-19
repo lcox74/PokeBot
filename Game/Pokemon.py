@@ -1,11 +1,13 @@
-import Pokemon_Get
-class Pokemon:
-    def __init__(self, pokefile, resistfile, name):
+import Pokemon_stats
+Pokemon_stats.Get_Pokemon()
+# Pokemon_Get.Get_Attacks()
+
+class New_Pokemon:
+    def __init__(self, name, pokefile = 'Pokemon_txt', resistfile = 'Resistances_txt'):
         self._pokefile = pokefile
         self._name = name
         self.get_stats()
         self.check_resistance(resistfile)
-        print(self._poketype)
     def get_stats(self):
         """ extracts the statistics of each pokemon type to add to the class """
         types = []
@@ -117,6 +119,3 @@ class Pokemon:
     def evolve(self):
         """ evolves the pokemon to its evolution state """
         pass
-    
-pikachu = Pokemon('Pokemon', 'Resistances', 'Pikachu')
-print(pikachu.get_resistances(), pikachu.get_type())
