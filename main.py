@@ -1,8 +1,11 @@
 import discord
 import asyncio
-from discord.ext import commands
 
+from discord.ext import commands
+from discord.utils import get
 from Game.Player import Player
+
+PokeFile = open("Pokemon_txt",'r')
 
 prefix = '#'
 token = open("TOKEN", "r")
@@ -46,13 +49,32 @@ async def hurt(ctx):
         await ctx.send(str(user) + ' Gotta join the pokeverse first mate!')
 
 @bot.command()
-async def NewPokemon(ctx, *, inputArg = '1'):
-    message = await discord.utils.get_text(ctx, inputArg)
+async def NewPokemon(ctx, inputArg):
+    message = inputArg
     user = ctx.message.author
     if(check_player(ctx, user)):
-        reply = players[user].Add_Pokemon(message)
-        await ctx.send(str(user) + str(reply))
+        ret = players[user].add_pokemon(message, PokeFile)
+        if(ret == True):
+            print('found running')
+            await ctx.send(str(user) + ' Pokemon Has Been Added!')
+        elif(ret == False):
+            print('not found and running')
+            await ctx.send(str(user) + ' Pokemon Not Found!')
     else:
         await ctx.send(str(user) + " You Have to Join First!")
+
+@bot.command()
+async def mypokemon(ctx):
+    user = ctx.message.author
+    pokemon_list = players[user].get_pokemon()
+    i = 0
+    for name in pokemon_list:
+        print(name)
+        if(i == 0):
+            reply = str(name)
+        else:
+            reply = (str(reply) + ', ' + str(name))
+        i += 1
+    await ctx.send(str(user) + ': ' + str(reply))
 
 bot.run(token.read())

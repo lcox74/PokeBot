@@ -1,5 +1,7 @@
-import Pokemon_stats
-Pokemon_stats.Get_Pokemon()
+print('Imported Pokemon')
+import os
+from Game.Pokestats import Get_Pokemon
+Get_Pokemon()
 # Pokemon_Get.Get_Attacks()
 
 class New_Pokemon:
@@ -48,6 +50,9 @@ class New_Pokemon:
     def get_attack(self):
         """ returns the attack power of the pokemon """
         return self._attack
+    def get_name(self):
+        """ returns the name of the pokemon in the class """
+        return self._name
     def get_health(self):
         """ returns the health of the pokemon """
         return self._health
