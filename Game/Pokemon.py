@@ -1,8 +1,9 @@
 print('Imported Pokemon')
 import os
 from Game.Pokestats import Get_Pokemon
+from Game.Pokestats import Get_Attacks
 Get_Pokemon()
-# Pokemon_Get.Get_Attacks()
+Get_Attacks()
 
 class New_Pokemon:
     def __init__(self, name, pokefile = 'Pokemon_txt', resistfile = 'Resistances_txt'):
@@ -45,7 +46,7 @@ class New_Pokemon:
         self._speed_attack = stats[4]
         self._speed_defence = stats[5]
         self._speed = stats[6]
-        # self._evolve_level = stats['elvl']
+        self._evolve_level = 20
         # self._evolution = stats['higher']
     def get_attack(self):
         """ returns the attack power of the pokemon """
@@ -118,9 +119,11 @@ class New_Pokemon:
             self.evolve()
     def level_up(self):
         """ levels up the pokemon """
-        self._level = int(self._level +1)
+        self._level = int(self._level + 1)
         self._xp = self._xp - self._level_up_xp
+        self._level_up_xp = self._level_up_xp + (10*self._level)
         self.check_evolve()
     def evolve(self):
         """ evolves the pokemon to its evolution state """
-        pass
+        print('Evolve')
+        return 'evolve'

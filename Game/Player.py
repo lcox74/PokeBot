@@ -41,8 +41,6 @@ class Player(object):
 					self.pokemon = [] # Set this as a index
 	def get_health(self):
 		return self.health
-	def get_hurt(self):
-		self.health = self.health - 5
 	def MoveLeft (self):
 		self._position = (self._position[0] - 1, self._position[1])
 	def MoveRight (self):

@@ -56,62 +56,64 @@ def Get_Pokemon():
         txt.write('! \r\n')              
     txt.close()
 
-# def Get_Attacks():
-#     url = 'https://pokemondb.net/move/generation/1'
-#     txt = open('Attacks_txt', 'w+')
+def Get_Attacks():
+    url = 'https://pokemondb.net/move/generation/1'
+    txt = open('Attacks_txt', 'w+')
 
-#     class AppURLopener(urllib.request.FancyURLopener):
-#         version = "Mozilla/5.0"
+    class AppURLopener(urllib.request.FancyURLopener):
+        version = "Mozilla/5.0"
 
-#     opener = AppURLopener()
-#     response = opener.open(url)
-#     soup = BeautifulSoup(response)
-#     data = soup.get_text('td').split('td')
+    opener = AppURLopener()
+    response = opener.open(url)
+    soup = BeautifulSoup(response)
+    data = soup.get_text('td').split('td')
     
-#     attack_list = []
-#     attack_dict = {}
-#     i = 0
-#     for dat in data:
-#         dat = dat.strip()
-#         if(dat == ''):
-#             if(i>0):
-#                 if(attack_list == []):
-#                     pass
-#                 else:
-#                     attack_dict[attack_list[0]] = attack_list[1:]
-#                     attack_list = []
-#             i += 1
-#             pass
-#         else:
-#             i = 0
-#             attack_list.append(dat)
-#     print(attack_dict)
-#     begin = False
-#     key_removal = []
-#     for keys in attack_dict.keys():
-#         if(keys[0] == ('A' or 'a')):
-#             begin = True
-#         elif(keys[0] != list(string.ascii_letters)):
-#             begin = False
-        
-#         if(data)
+    attack_list = []
+    attack_dict = {}
+    all_attacks = []
+    i = 0
+    for dat in data:
+        dat = dat.strip()
+        if(dat == ''):
+            if(i>0):
+                if(attack_list == []):
+                    pass
+                else:
+                    attack_dict[attack_list[0]] = attack_list[1:]
+                    attack_list = []
+            i += 1
+            pass
+        else:
+            i = 0
+            attack_list.append(dat)
+    begin = False
+    upper_list = list(string.ascii_uppercase)
+    for keys in attack_dict.keys():
+        if(keys[0] == upper_list[0]):
+            begin = True
+            all_attacks.append(keys)
+        elif(begin == True):
+            upper_list = upper_list[1:]
+            if(len(upper_list) == 0):
+                begin = False
+            elif(keys[0] == upper_list[0]):
+                begin = True
+                all_attacks.append(keys)
+    final_attacks = []
+    for attacks in all_attacks:
+        for key in attack_dict.keys():
+            if(attacks == key):
+                lst = [str(key)] + attack_dict[key]
+                final_attacks.append(lst)
 
-            
-
-
-#     for key in key_removal:
-#         attack_dict.pop(key)
-#     for keyn in attack_dict.keys():
-#         for item in attack_dict[keyn]:
-#             try:
-#                 txt.write(str(item) + ',')
-#             except UnicodeEncodeError:
-#                 item = ''
-#                 for letter in item:
-#                     try:
-#                         item = item + str(letter)
-#                     except UnicodeEncodeError:
-#                         pass
-#                 txt.write(str(item) + ',') 
-#         txt.write('! \r\n')              
-#     txt.close()
+    for att in final_attacks:
+        for item in att:
+            item = item.strip()
+            if(item == '—'):
+                item = str(0)
+            try:
+                txt.write(str(item) + ',')
+            except UnicodeEncodeError:
+                pass
+        txt.write('! \r\n')   
+    txt.close()

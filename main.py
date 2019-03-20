@@ -37,16 +37,6 @@ async def join(ctx):
         await ctx.send("Done")
     else:
         await ctx.send(str(user) + " Fight or Die, Can't Restart Now!")
-    
-@bot.command()
-async def hurt(ctx):
-    user = ctx.message.author
-    if(user in players):
-        await ctx.send(str(players[user].get_health()))
-        players[user].get_hurt()
-        await ctx.send(str(players[user].get_health()))
-    else:
-        await ctx.send(str(user) + ' Gotta join the pokeverse first mate!')
 
 @bot.command()
 async def NewPokemon(ctx, inputArg):
