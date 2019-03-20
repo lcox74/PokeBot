@@ -7,7 +7,7 @@ from Game.Player import Player
 from Game.Pokestats import Get_Pokemon
 from Game.Pokestats import Get_Attacks
 
-prefix = '#'
+prefix = 'poke'
 token = open("TOKEN", "r")
 players = {}
 
@@ -39,7 +39,7 @@ async def join(ctx):
         await ctx.send(str(user) + " Fight or Die, Can't Restart Now!")
 
 @bot.command()
-async def NewPokemon(ctx, inputArg):
+async def new(ctx, inputArg):
     PokeFile = open('Pokemon_txt', 'r')
     print('NewPokemon')
     message = inputArg
@@ -56,16 +56,18 @@ async def NewPokemon(ctx, inputArg):
         await ctx.send(str(user) + " You Have to Join First!")
 
 @bot.command()
-async def mypokemon(ctx):
+async def mine(ctx):
     user = ctx.message.author
     pokemon_list = players[user].get_pokemon()
-    i = 0
-    for name in pokemon_list:
-        if(i == 0):
-            reply = str(name)
-        else:
-            reply = (str(reply) + ', ' + str(name))
-        i += 1
-    await ctx.send(str(user) + ': ' + str(reply))
+    user = ctx.message.author
+    final_reply = (user.mention + '\n')
+    for poke in pokemon_list:
+        reply = (str(poke.get_name()) + ' (' + str(poke.get_level()) + '),' +' Health: ' + str(poke.get_health()[0]) +'/'+ str(poke.get_health()[1]) + ','+ ' Attack: ' + str(poke.get_attack()) + ',' +' XP: ' + str(poke.get_xp())+'/'+str(poke.get_level_up()) +','+ ' Types: ' + str(poke.show_type()) + '\n')
+        final_reply = final_reply + reply
+    await ctx.send(reply)
+
+@bot.command()
+async def all(ctx):
+    await ctx.send(("Sorry buddy gotta go directly to the source for that:  " + 'https://pokemondb.net/pokedex/all'))
 
 bot.run(token.read())

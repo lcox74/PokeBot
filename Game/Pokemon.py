@@ -38,8 +38,9 @@ class New_Pokemon:
         """ sets the changing statistics of the pokemon """
         self._attack = stats[2]
         self._health = stats[1]
+        self._max_health = stats[1]
         self._poketype = types
-        self._level = 0
+        self._level = 1
         self._xp = 0
         self._level_up_xp = 100
         self._defence = stats[3]
@@ -55,17 +56,33 @@ class New_Pokemon:
         """ returns the name of the pokemon in the class """
         return self._name
     def get_health(self):
-        """ returns the health of the pokemon """
-        return self._health
+        """ returns the current health[0] and maximum health of pokemon[1] of the pokemon """
+        return [self._health, self._max_health]
     def get_type(self):
         """ returns the pokemons type """
         return self._poketype
+    def show_type(self):
+        """ Return pokemon types in string list place """
+        i = 0
+        for type in self._poketype:
+            if(i == 0):
+                reply = str(type)
+            else:
+                reply = reply +(', ' + str(type))
+            i += 1
+        return reply
     def get_resistances(self):
         """ returns the resistances and damage values of the pokemon """
         return self._resistances
+    def get_level_up(self):
+        """ Returns the amount of xp required for next level up"""
+        return self._level_up_xp
     def get_level(self):
         """ returns the level of the pokemon """
         return self._level
+    def get_xp(self):
+        """Returns the current amount of xp"""
+        return self._xp
     def check_resistance(self, resistance_chart):
         """ Reads the resistances file and isolates the relative strength and weaknesses of the pokemon """
         self._resistances = {}

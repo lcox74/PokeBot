@@ -56,7 +56,7 @@ class Player(object):
 	def get_pokemon(self):
 		current_pokemon = []
 		for pokemon in self.pokemon:
-    			current_pokemon.append(pokemon.get_name())
+    			current_pokemon.append(pokemon)
 		return current_pokemon
 	def add_pokemon(self, name, pokefile):
 		complete = False
