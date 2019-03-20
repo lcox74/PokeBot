@@ -4,8 +4,8 @@ import asyncio
 from discord.ext import commands
 from discord.utils import get
 from Game.Player import Player
-
-PokeFile = open("Pokemon_txt",'r')
+from Game.Pokestats import Get_Pokemon
+from Game.Pokestats import Get_Attacks
 
 prefix = '#'
 token = open("TOKEN", "r")
@@ -40,6 +40,8 @@ async def join(ctx):
 
 @bot.command()
 async def NewPokemon(ctx, inputArg):
+    PokeFile = open('Pokemon_txt', 'r')
+    print('NewPokemon')
     message = inputArg
     user = ctx.message.author
     if(check_player(ctx, user)):
@@ -59,7 +61,6 @@ async def mypokemon(ctx):
     pokemon_list = players[user].get_pokemon()
     i = 0
     for name in pokemon_list:
-        print(name)
         if(i == 0):
             reply = str(name)
         else:

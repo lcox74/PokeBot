@@ -41,6 +41,8 @@ class Player(object):
 					self.pokemon = [] # Set this as a index
 	def get_health(self):
 		return self.health
+	def get_hurt(self):
+		self.health = self.health - 5
 	def MoveLeft (self):
 		self._position = (self._position[0] - 1, self._position[1])
 	def MoveRight (self):
@@ -57,21 +59,12 @@ class Player(object):
     			current_pokemon.append(pokemon.get_name())
 		return current_pokemon
 	def add_pokemon(self, name, pokefile):
-		print('running add pokemon')
 		complete = False
-		print(complete)
-		print('trying')
 		for line in pokefile:
 			line = line.strip().split(',')
-			print(line)
 			if(line[0] == ''):
-				print('skipping')
 				pass
-			else:
-				print('found')
-				if(line[0] == name):
-					self.pokemon.append(New_Pokemon(name))
-					complete = True
-				else:
-					pass
+			elif(line[0] == name):
+				self.pokemon.append(New_Pokemon(name))
+				complete = True
 		return complete
